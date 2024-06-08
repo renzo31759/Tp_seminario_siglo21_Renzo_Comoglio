@@ -155,6 +155,31 @@ INSERT INTO `sensor` VALUES (1,1,'Temperatura'),(2,1,'Humedad'),(3,1,'Monóxido 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tablagraficos`
+--
+
+DROP TABLE IF EXISTS `tablagraficos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tablagraficos` (
+  `IDSensor` int(11) NOT NULL,
+  `nombre_dato` varchar(255) NOT NULL,
+  `dato` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IDSensor`,`nombre_dato`),
+  CONSTRAINT `tablagraficos_ibfk_1` FOREIGN KEY (`IDSensor`) REFERENCES `sensor` (`IDSensor`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tablagraficos`
+--
+
+LOCK TABLES `tablagraficos` WRITE;
+/*!40000 ALTER TABLE `tablagraficos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tablagraficos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tipo_usuario`
 --
 
@@ -178,6 +203,35 @@ LOCK TABLES `tipo_usuario` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
+  `ID_persona` int(11) NOT NULL,
+  `id_tipo` int(11) DEFAULT NULL,
+  `usuario` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID_persona`),
+  UNIQUE KEY `usuario` (`usuario`),
+  KEY `id_tipo` (`id_tipo`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ID_persona`) REFERENCES `persona` (`ID_persona`),
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_usuario` (`id_tipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'tp_seminario_siglo21_renzo_comoglio'
 --
 
@@ -194,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08  3:07:13
+-- Dump completed on 2024-06-08  3:31:45
