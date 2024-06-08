@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `detector_incendios` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `detector_incendios`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: localhost    Database: detector_incendios
+-- Host: localhost    Database: tp_seminario_siglo21_renzo_comoglio
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.32-MariaDB
 
@@ -41,6 +39,7 @@ CREATE TABLE `datosensor` (
 
 LOCK TABLES `datosensor` WRITE;
 /*!40000 ALTER TABLE `datosensor` DISABLE KEYS */;
+INSERT INTO `datosensor` VALUES (1,'2023-06-01','12:00:00',25,20),(1,'2023-06-02','12:30:00',26,21),(2,'2023-06-01','12:00:00',60,50),(2,'2023-06-02','12:30:00',62,52),(3,'2023-06-01','12:00:00',50,45),(3,'2023-06-02','12:30:00',52,47),(4,'2023-06-01','12:00:00',400,350),(4,'2023-06-02','12:30:00',410,360);
 /*!40000 ALTER TABLE `datosensor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +64,7 @@ CREATE TABLE `gateway` (
 
 LOCK TABLES `gateway` WRITE;
 /*!40000 ALTER TABLE `gateway` DISABLE KEYS */;
+INSERT INTO `gateway` VALUES (1,'00:14:22:01:23:45',34.0522);
 /*!40000 ALTER TABLE `gateway` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,6 +79,7 @@ CREATE TABLE `nodos` (
   `IDNodo` int(11) NOT NULL,
   `Geolocalización` double DEFAULT NULL,
   `ID_Gateway` int(11) DEFAULT NULL,
+  `Estado` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IDNodo`),
   KEY `ID_Gateway` (`ID_Gateway`),
   CONSTRAINT `nodos_ibfk_1` FOREIGN KEY (`ID_Gateway`) REFERENCES `gateway` (`ID`)
@@ -91,6 +92,7 @@ CREATE TABLE `nodos` (
 
 LOCK TABLES `nodos` WRITE;
 /*!40000 ALTER TABLE `nodos` DISABLE KEYS */;
+INSERT INTO `nodos` VALUES (1,1,1,'OK');
 /*!40000 ALTER TABLE `nodos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,32 +150,8 @@ CREATE TABLE `sensor` (
 
 LOCK TABLES `sensor` WRITE;
 /*!40000 ALTER TABLE `sensor` DISABLE KEYS */;
+INSERT INTO `sensor` VALUES (1,1,'Temperatura'),(2,1,'Humedad'),(3,1,'Monóxido de Carbono'),(4,1,'Dióxido de Carbono');
 /*!40000 ALTER TABLE `sensor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tablagraficos`
---
-
-DROP TABLE IF EXISTS `tablagraficos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tablagraficos` (
-  `IDSensor` int(11) NOT NULL,
-  `nombre_dato` varchar(255) NOT NULL,
-  `dato` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDSensor`,`nombre_dato`),
-  CONSTRAINT `tablagraficos_ibfk_1` FOREIGN KEY (`IDSensor`) REFERENCES `sensor` (`IDSensor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tablagraficos`
---
-
-LOCK TABLES `tablagraficos` WRITE;
-/*!40000 ALTER TABLE `tablagraficos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tablagraficos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -200,40 +178,11 @@ LOCK TABLES `tipo_usuario` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `usuario`
---
-
-DROP TABLE IF EXISTS `usuario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuario` (
-  `ID_persona` int(11) NOT NULL,
-  `id_tipo` int(11) DEFAULT NULL,
-  `usuario` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID_persona`),
-  UNIQUE KEY `usuario` (`usuario`),
-  KEY `id_tipo` (`id_tipo`),
-  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ID_persona`) REFERENCES `persona` (`ID_persona`),
-  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_usuario` (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuario`
---
-
-LOCK TABLES `usuario` WRITE;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping events for database 'detector_incendios'
+-- Dumping events for database 'tp_seminario_siglo21_renzo_comoglio'
 --
 
 --
--- Dumping routines for database 'detector_incendios'
+-- Dumping routines for database 'tp_seminario_siglo21_renzo_comoglio'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -245,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-18 21:52:08
+-- Dump completed on 2024-06-08  3:07:13
