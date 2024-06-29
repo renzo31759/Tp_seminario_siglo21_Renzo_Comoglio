@@ -61,5 +61,9 @@ public class Gateway {
         System.out.println("Actualizando configuración...");
     }
     
+    @Override
+    public String toString() {
+        return "Gateway [ID=" + id_gateway + ", MAC=" + mac + ", Geolocalización=" + geolocalizacion + "]";
+    }
     
 }

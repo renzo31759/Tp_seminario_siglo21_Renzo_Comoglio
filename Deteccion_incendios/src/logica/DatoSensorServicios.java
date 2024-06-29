@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import percistencia.DatabaseConection; 
+import persistencia.DatabaseConection; 
 import java.sql.ResultSet;
 
 

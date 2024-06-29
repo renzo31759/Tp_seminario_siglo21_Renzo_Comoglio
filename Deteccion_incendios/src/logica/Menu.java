@@ -100,6 +100,8 @@ public class Menu {
         System.out.println("Nodo eliminado exitosamente.");
     }
 
+ 
+    
     private void gestionarSensores() {
     System.out.println("-------------------");
     System.out.println("Gestión de Sensores:");
@@ -108,13 +110,18 @@ public class Menu {
 
     System.out.println("Datos de los Sensores del Nodo " + idNodo + ":");
     List<Sensor> sensores = sensorServicios.obtenerSensoresPorNodo(idNodo);
+    
+    if (sensores.isEmpty()) {
+        System.out.println("No se encontraron sensores para el nodo con ID " + idNodo);
+        return;
+    }
 
     for (Sensor sensor : sensores) {
         System.out.println("Datos del Sensor " + sensor.getNombre() + " (ID: " + sensor.getId_sensor() + "):");
         List<DatoSensor> datosSensor = datoSensorServicios.obtenerDatosPorSensor(sensor.getId_sensor());
         for (DatoSensor dato : datosSensor) {
-            System.out.println("Fecha: " + dato.obtenerFecha() + ", Hora: " + dato.obtenerHora() + ","
-                    + " Valor: " + dato.obtenerValor() + ", Valor Normal: " + dato.getValor_normal());
+            System.out.println("Fecha: " + dato.obtenerFecha() + ", Hora: " + dato.obtenerHora()
+                    + ", Valor: " + dato.obtenerValor() + ", Valor Normal: " + dato.getValor_normal());
         }
     }
 }
