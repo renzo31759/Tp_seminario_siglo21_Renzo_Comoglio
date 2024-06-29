@@ -39,7 +39,7 @@ CREATE TABLE `datosensor` (
 
 LOCK TABLES `datosensor` WRITE;
 /*!40000 ALTER TABLE `datosensor` DISABLE KEYS */;
-INSERT INTO `datosensor` VALUES (1,'2023-06-01','12:00:00',25,20),(1,'2023-06-02','12:30:00',26,21),(2,'2023-06-01','12:00:00',60,50),(2,'2023-06-02','12:30:00',62,52),(3,'2023-06-01','12:00:00',50,45),(3,'2023-06-02','12:30:00',52,47),(4,'2023-06-01','12:00:00',400,350),(4,'2023-06-02','12:30:00',410,360);
+INSERT INTO `datosensor` VALUES (1,'2023-06-01','12:00:00',25,20),(1,'2023-06-02','12:30:00',26,21),(2,'2023-06-01','12:00:00',60,50),(2,'2023-06-02','12:30:00',62,52),(3,'2023-06-01','12:00:00',50,45),(3,'2023-06-02','12:30:00',52,47),(4,'2023-06-01','12:00:00',400,350),(4,'2023-06-02','12:30:00',410,360),(5,'2024-06-29','17:00:00',40,20),(5,'2024-06-30','17:30:00',31,20),(6,'2024-06-29','17:00:00',30,50),(6,'2024-06-30','17:30:00',31,50),(7,'2024-06-29','17:00:00',45,45),(7,'2024-06-30','17:30:00',45,45),(8,'2024-06-29','17:00:00',400,350),(8,'2024-06-30','17:30:00',410,350);
 /*!40000 ALTER TABLE `datosensor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `gateway` (
 
 LOCK TABLES `gateway` WRITE;
 /*!40000 ALTER TABLE `gateway` DISABLE KEYS */;
-INSERT INTO `gateway` VALUES (1,'00:14:22:01:23:45',34.0522);
+INSERT INTO `gateway` VALUES (1,'00:14:22:01:23:45',34.0522),(2,'00:00:00',122333);
 /*!40000 ALTER TABLE `gateway` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,8 +81,8 @@ CREATE TABLE `nodos` (
   `ID_Gateway` int(11) DEFAULT NULL,
   `Estado` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IDNodo`),
-  KEY `ID_Gateway` (`ID_Gateway`),
-  CONSTRAINT `nodos_ibfk_1` FOREIGN KEY (`ID_Gateway`) REFERENCES `gateway` (`ID`)
+  KEY `nodos_ibfk_1` (`ID_Gateway`),
+  CONSTRAINT `nodos_ibfk_1` FOREIGN KEY (`ID_Gateway`) REFERENCES `gateway` (`ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +92,7 @@ CREATE TABLE `nodos` (
 
 LOCK TABLES `nodos` WRITE;
 /*!40000 ALTER TABLE `nodos` DISABLE KEYS */;
-INSERT INTO `nodos` VALUES (1,1,1,'OK');
+INSERT INTO `nodos` VALUES (1,1,1,'OK'),(2,3.45667,1,'Ok'),(3,776546,1,'Ok');
 /*!40000 ALTER TABLE `nodos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +139,8 @@ CREATE TABLE `sensor` (
   `IDNodo` int(11) DEFAULT NULL,
   `Nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IDSensor`),
-  KEY `IDNodo` (`IDNodo`),
-  CONSTRAINT `sensor_ibfk_1` FOREIGN KEY (`IDNodo`) REFERENCES `nodos` (`IDNodo`)
+  KEY `sensor_ibfk_1` (`IDNodo`),
+  CONSTRAINT `sensor_ibfk_1` FOREIGN KEY (`IDNodo`) REFERENCES `nodos` (`IDNodo`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,7 +150,7 @@ CREATE TABLE `sensor` (
 
 LOCK TABLES `sensor` WRITE;
 /*!40000 ALTER TABLE `sensor` DISABLE KEYS */;
-INSERT INTO `sensor` VALUES (1,1,'Temperatura'),(2,1,'Humedad'),(3,1,'Monóxido de Carbono'),(4,1,'Dióxido de Carbono');
+INSERT INTO `sensor` VALUES (1,1,'Temperatura'),(2,1,'Humedad'),(3,1,'Monóxido de Carbono'),(4,1,'Dióxido de Carbono'),(5,2,'Temperatura'),(6,2,'Humedad'),(7,2,'Monóxido de Carbono'),(8,2,'Dióxido de Carbono');
 /*!40000 ALTER TABLE `sensor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-08  3:31:45
+-- Dump completed on 2024-06-29 13:03:13
